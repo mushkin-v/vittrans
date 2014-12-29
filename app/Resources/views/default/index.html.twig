@@ -22,8 +22,8 @@
                     <div class="form-group">
                         <div class="col-md-6">
                         <select name="transLang" class="form-control">
-                            <option selected value="1">from russian to english</option>
-                            <option value="2">from english to russian</option>
+                            <option {% if transLang == 1 %}selected{% endif %} value="1">from russian to english</option>
+                            <option {% if transLang == 2 %}selected{% endif %} value="2">from english to russian</option>
                         </select>
                         </div>
                         <br><br>
@@ -50,7 +50,7 @@
                               readonly
                               rows="10"
                               cols="30"
-                            >{{ text|vittrans('ru', 'en') }} - {{ transLang }}</textarea>
+                            >{{ text|vittrans(fromLang, toLang) }}</textarea>
                 </div>
             </div>
 

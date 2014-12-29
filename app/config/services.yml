@@ -1,8 +1,12 @@
 parameters:
     class_vittrans: AppBundle\Services\VitTransExtension
+    class_vitchoose: AppBundle\Services\VitChooseLang
 
 services:
     vittrans:
         class:     %class_vittrans%
         tags:
             - { name: twig.extension }
+
+    vitchooselang:
+            class:     %class_vitchoose%
