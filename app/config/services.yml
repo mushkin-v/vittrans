@@ -10,3 +10,4 @@ services:
 
     vitchooselang:
             class:     %class_vitchoose%
+            arguments: ["@router"]

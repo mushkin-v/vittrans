@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/{_locale}", name="homepage", defaults={"_locale": "en"}, requirements={"_locale": "en|ru"})
      */
     public function indexAction(Request $request)
     {
@@ -25,11 +25,16 @@ class DefaultController extends Controller
                     'toLang' => $lang['to'],
                 ]);
         }
+
+        $transLang = $this->get('router')->generate('homepage', array('_locale' => $request->getLocale()));
+        $text = $this->get('translator')->trans('Text.to.trans');
+        $lang = $this->get('vitchooselang')->chooseLang($transLang);
+
         return $this->render('default/index.html.twig',
-            ['transLang' => '2',
-                'text' => 'Enter text to translate',
-                'fromLang' => 'en',
-                'toLang' => 'ru',
+            ['transLang' => $transLang,
+                'text' => $text,
+                'fromLang' => $lang['from'],
+                'toLang' => $lang['to'],
             ]);
     }
 }

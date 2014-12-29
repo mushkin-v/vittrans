@@ -2,11 +2,19 @@
 
 namespace AppBundle\Services;
 
+use Symfony\Component\Routing\Router;
+
 class VitChooseLang
 {
+    protected $router;
+
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
     public function chooseLang($transLang)
     {
-        if ($transLang == 1){
+        if ($transLang == $this->router->generate('homepage', array('_locale' => 'ru'))){
             $from = 'ru';
             $to = 'en';
         } else {
