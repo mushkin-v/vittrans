@@ -17,6 +17,7 @@ class DefaultController extends Controller
             $transLang = $request->request->get('transLang');
             $text = $request->request->get('textArea');
             $lang = $this->get('vitchooselang')->chooseLang($transLang);
+
             return $this->render('default/index.html.twig',
                 ['transLang' => $transLang,
                     'text' => $text,
@@ -25,10 +26,10 @@ class DefaultController extends Controller
                 ]);
         }
         return $this->render('default/index.html.twig',
-            ['transLang' => '1',
+            ['transLang' => '2',
                 'text' => 'Enter text to translate',
-                'fromLang' => 'ru',
-                'toLang' => 'eng',
+                'fromLang' => 'en',
+                'toLang' => 'ru',
             ]);
     }
 }

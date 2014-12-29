@@ -6,11 +6,9 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand">Mushkin Translator!</a>
+                    <a class="navbar-brand">Mushkin's Translator</a>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
     </div>
 
@@ -19,42 +17,39 @@
 
             <div class="col-md-6">
                 <form role="form" method="post" action="{{ path ('homepage') }}">
+
                     <div class="form-group">
-                        <div class="col-md-6">
+                        <label for="textArea">Enter text to translate:</label>
+                        <input class="form-control"
+                                  id="textArea"
+                                  name="textArea"
+                                  placeholder="Enter text to translate"
+                                  value ="{{ text }}">
+                    </div>
+
+                    <div class="col-md-6">
                         <select name="transLang" class="form-control">
                             <option {% if transLang == 1 %}selected{% endif %} value="1">from russian to english</option>
                             <option {% if transLang == 2 %}selected{% endif %} value="2">from english to russian</option>
                         </select>
-                        </div>
-                        <br><br>
-                        <label for="textArea">Enter text to translate:</label>
-                        <textarea class="form-control"
-                                  id="textArea"
-                                  name="textArea"
-                                  placeholder="Введите текст для перевода"
-                                  rows="10"
-                                  cols="30">{{ text }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary col-md-offset-10">Translate</button>
+                    <button type="reset" class="btn btn-danger col-md-offset-2">Reset</button>
+                    <button type="submit" class="btn btn-primary col-md-offset-0">Translate</button>
+
                 </form>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <br><br>
                     <label for="textArea2">Translated text:</label>
-                    <textarea class="form-control"
+                    <input class="form-control"
                               id="textArea2"
-                              placeholder="  "
                               readonly
-                              rows="10"
-                              cols="30"
-                            >{{ text|vittrans(fromLang, toLang) }}</textarea>
+                              value="{{ text|vittrans(fromLang, toLang) }}">
                 </div>
             </div>
 
         </div>
     </div>
-
 {% endblock %}
