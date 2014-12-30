@@ -1,5 +1,60 @@
-{% extends 'base.html.twig' %}
+{% extends ":default:layout.html.twig" %}
 
 {% block body %}
-    Homepage.
+
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('homepage') }}">{{ "Mushkin.Trans"|trans() }}</a>
+                    <p style="margin-top: 5px; float: right; background-color: #0088CC;color: whitesmoke">{{ app.request.locale }}</p>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="'row">
+
+            <div class="col-md-6">
+                <form role="form" method="post" action="{{ path ('homepage') }}">
+
+                    <div class="form-group">
+                        <label for="textArea">{{ "Text.to.trans"|trans() }}</label>
+                        <input class="form-control"
+                                  id="textArea"
+                                  name="textArea"
+                                  placeholder="{{ "Text.to.trans"|trans() }}"
+                                  value ="{{ text }}">
+                    </div>
+
+                    <div class="col-md-6">
+                        <select name="transLang" class="form-control" onChange="if(this.options[this.selectedIndex].value!=''){window.location=this.options[this.selectedIndex].value}else{this.options[selectedIndex=0];}">
+                            <option {% if app.request.locale == 'en' %}selected{% endif %} value="{{ path('homepage', {'_locale' : 'en'}) }}">
+                                {{ "en.to.ru"|trans() }}
+                            </option>
+                            <option {% if app.request.locale == 'ru' %}selected{% endif %} value="{{ path('homepage', {'_locale' : 'ru'}) }}">
+                                {{ "ru.to.en"|trans() }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <button type="reset" class="btn btn-danger col-md-offset-2">{{ "Reset"|trans() }}</button>
+                    <button type="submit" class="btn btn-primary col-md-offset-0">{{ "Trans"|trans() }}</button>
+
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="textArea2">{{ "Trans.text"|trans() }}</label>
+                    <input class="form-control"
+                              id="textArea2"
+                              readonly
+                              value="{{ text|vittrans(fromLang, toLang) }}">
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
