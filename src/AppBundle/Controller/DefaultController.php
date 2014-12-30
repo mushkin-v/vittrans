@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         if ($request->isMethod('POST')) {
-            $transLang = $request->request->get('transLang');
+            $transLang = $request->getLocale();
             $text = $request->request->get('textArea');
             $lang = $this->get('vitchooselang')->chooseLang($transLang);
 
@@ -26,7 +26,7 @@ class DefaultController extends Controller
                 ]);
         }
 
-        $transLang = $this->get('router')->generate('homepage', array('_locale' => $request->getLocale()));
+        $transLang = $request->getLocale();
         $text = $this->get('translator')->trans('Text.to.trans');
         $lang = $this->get('vitchooselang')->chooseLang($transLang);
 

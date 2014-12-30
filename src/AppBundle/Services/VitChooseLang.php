@@ -14,7 +14,7 @@ class VitChooseLang
     }
     public function chooseLang($transLang)
     {
-        if ($transLang == $this->router->generate('homepage', array('_locale' => 'ru'))){
+        if ($transLang == 'ru'){
             $from = 'ru';
             $to = 'en';
         } else {
