@@ -13,28 +13,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $transLang = $request->getLocale();
-            $text = $request->request->get('textArea');
-            $lang = $this->get('vitchooselang')->chooseLang($transLang);
-
-            return $this->render('default/index.html.twig',
-                ['transLang' => $transLang,
-                    'text' => $text,
-                    'fromLang' => $lang['from'],
-                    'toLang' => $lang['to'],
-                ]);
-        }
-
-        $transLang = $request->getLocale();
-        $text = $this->get('translator')->trans('Text.to.trans');
-        $lang = $this->get('vitchooselang')->chooseLang($transLang);
+        $text = $request->isMethod('POST')? $request->request->get('textArea'): $this->get('translator')->trans('Text.to.trans');
 
         return $this->render('default/index.html.twig',
-            ['transLang' => $transLang,
-                'text' => $text,
-                'fromLang' => $lang['from'],
-                'toLang' => $lang['to'],
+            [   'text' => $text,
+                'fromLang' => $request->getLocale() == 'ru'? 'ru': 'en',
+                'toLang' => $request->getLocale() == 'ru'? 'en': 'ru',
             ]);
     }
 }

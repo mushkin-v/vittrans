@@ -7,6 +7,3 @@ services:
         class:     %class_vittrans%
         tags:
             - { name: twig.extension }
-
-    vitchooselang:
-            class:     %class_vitchoose%
