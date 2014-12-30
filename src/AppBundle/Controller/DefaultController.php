@@ -13,12 +13,13 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $text = $request->isMethod('POST')? $request->request->get('textArea'): $this->get('translator')->trans('Text.to.trans');
+//        $text = $request->request->has('text')? $request->request->get('text'): $this->get('translator')->trans('Text.to.trans');
+        $text = $request->isMethod('GET')? $request->get('text'): $this->get('translator')->trans('Text.to.trans');
 
         return $this->render('default/index.html.twig',
             [   'text' => $text,
-                'fromLang' => $request->getLocale() == 'ru'? 'ru': 'en',
-                'toLang' => $request->getLocale() == 'ru'? 'en': 'ru',
+                'fromLang' => $request->isMethod('GET')? $request->get('translate-from'): 'en',
+                'toLang' => $request->isMethod('GET')? $request->get('translate-to'): 'ru',
             ]);
     }
 }
